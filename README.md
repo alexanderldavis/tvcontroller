@@ -32,7 +32,77 @@ PART 2: TRANSITION CODE TO RASPBERRY PI
 	TODO!!!
     
 ## Replication instructions
-If anybody is interested in installing their own version of this little project, feel free to follow these instructions! I found most of this information online, so be sure to ask Gewgle for instructions if you question my methods!
+If anybody is interested in installing their own version of this little project, feel free to follow these instructions! I found most of this information online, so be sure to ask Gewgle for instructions if you question my methods! If you are new to Arduino, welcome! You may want to complete some (also fun) smaller projects. This one is not difficult by any means, but I may not be the most verbose teacher. There are other tutorials that will be easier to start with (and will explain basic better).
 
-1. Acquire monies to purchase an Arduino UNO Rev3, a breadboard, cables, a 3-prong IR reciever made for Arduino, and an IR transmitter made for Arduino. (All of these are found on Amazon, but found cheaper on eBay).
-2. Assemble these pieces as shown in the diagram below.![Arduino Reciever]({{site.baseurl}}/https://raw.githubusercontent.com/alexanderldavis/tvcontroller/master/Images/irreceiver_bb.png)
+### Control TV from Command Line
+
+#### 1. Find materials 
+Acquire monies to purchase an Arduino UNO Rev3, a breadboard, cables, a 3-prong IR reciever made for Arduino, and an IR transmitter made for Arduino. (All of these are found on Amazon, but found cheaper on eBay).
+
+#### 2. Assembly
+Assemble these pieces as shown in the diagram below (FIG1). Plug Arduino into your computer.
+
+(FIG1)
+![Arduino Reciever](https://raw.githubusercontent.com/alexanderldavis/tvcontroller/master/Images/irreceiver_bb.png)
+(Assembly of the Arduino IR receiver. This receiver will allow you to identify your remote's code and prep the raw data for your transmitter code.) 
+
+### 3. Download code
+Scroll up on this page and download the files IRReceiver.ino and TVControllerMainBlank.ino.
+
+
+Open IRReceiver.ino in the Arduino IDE, download to Arduino and run it. Open your Serial Monitor and press a button on your remote once. It will output the code in the right format.
+
+The format will be:
+> We loved with a love that was more than love
+
+``` void name() {
+	delayMicroseconds(57964);
+	pulseIR(9280);
+	delayMicroseconds(4580);
+	pulseIR(600);
+    ...
+}```
+
+Copy the code from the Serial Monitor and paste it into the TVControllerMainBlank.ino code at the bottom of the file. Then rename the function name "void [put new name here] ()" and take that name, scroll up the TVController MainBlank code, and paste it in the void loop().
+
+Example: Your first button is the TV Power button. Paste the code in the TVControllerMainBlank code at the very bottom (read inline comments). Rename the function.
+
+(at bottom of file:)
+change from
+```void name() { ... }```
+to
+```void powerButton() {
+	... 
+}```.
+
+Take this new function name, scroll up to the ```void loop() {``` code at the top of the page, and paste the function name in one of the ```if (val == '1') { ... }``` positions.
+
+(at top of file:)
+change from
+```if (val == 1) {}```
+to
+```if (val == 1) {powerButton();}```.
+
+Repeat these steps for each button you wish to code. Note: This worked for my TV and my Apple TV. It did not work with my Alexa remote, other remotes because they are not IR. Ensure your remote is an IR remote before trying this code! (It seems obvious, but I got caught up in my initial tests!)
+
+Once the TVControllerMainBlank code is ready, it's time to start transmitting the code!
+
+### 4. Assembly (pt2)
+Assemble these pieces as shown in the diagram below (FIG2). Plug Arduino into your computer.
+
+(FIG2)
+![Arduino Transmitter](https://raw.githubusercontent.com/alexanderldavis/tvcontroller/master/Images/irtransmitter_bb.png)
+
+Upload TVControllerMainBlank.ino to Arduino.
+
+### 5. Enable Arduino-Serial
+Download the Zip of [arduino-serial](https://github.com/todbot/arduino-serial) (https://github.com/todbot/arduino-serial).
+
+Unzip the file in your desktop/documents directory. Go to your terminal, navigate to the directory and use command ```make arduino-serial``` to compile the file, then use command ```ls /dev/tty.*``` to find all serial ports available. It should look like: ```/dev/tty.Bluetooth-Incoming-Port	/dev/tty.usbmodemFD121``` (with Arduino plugged in). Copy the second serial port (in this case ```/dev/tty.usbmodemFD121```) and put it aside for safekeeping.
+
+Got back to terminal and type ```./arduino-serial -b 9600 -p /dev/tty.usbmodemFD121 -s 1```, replacing my ```/dev/tty.usbmodemFD121``` with your copied serial port. Press enter and voila! Barring any major issues your Arduino will transmit the 'on' code for your TV and you can watch some HBO! Change the number at the end of the terminal invocation to invoke different buttons. For example, if you 'Input' button is in your code in the second button function slot, you can change delete the 1 and insert a 2 to send the 'Input' code! You can create bash files/aliases in your .bash_profile to make shortcuts for this. For example, I can type 'tv' into my command line to toggle the tv, tv_up to change volume, etc..
+
+TODO[Wishlist]=Create shortcut in TVControllerMain code to increase volume in increments of 10, instead of individual units (takes too long!)
+
+I will add to these instructions as I continue to figure them out! I think the next steps will involve creating a personal Skill for the Alexa.
+
