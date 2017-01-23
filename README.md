@@ -1,6 +1,7 @@
 # The AMAZON ECHO (Alexa) TV Controller
 
-[INTRO -- This is an intro I wrote while procrastinating on a project, so feel free to skip it!]
+# The Intro
+[This is an intro I wrote while procrastinating on a project, so feel free to skip it!]
 We humans (for we are humans--right?), are on the verge of a massive revolution. I'm sure I'm hardly the only one who was enchanted by the Orwellian prospect of a humanity entirely dependent on technology, and while some may cite Karel Čapek's R.U.R to suggest the deleterious impact of robots on humanity, I stubbornly submit the same text as evidence to suggest the benefits of a robot revolution. Humanity's definition of itself is far too narrow, and the declaration of sentiency for man-made items should not be restricted to offspring.
 While we are not quite at the point of Westworld-ian technology (I side with Ford's vision of humanity, BTW), I enjoy engaging in these debates!
 
@@ -19,7 +20,13 @@ I write into this empty void to help me organize my thoughts. The first step of 
   to '	delayMicroseconds(57964);
 	      pulseIR(9280);
      ')
-TODO!!!
+Update (later that day): I also edited the IRReciever.ino code so that it outputs the raw data in the format required by the Transmitter code.
 
 # The Agenda
-TODO!!!
+PART 1: CONTROL TV FROM COMMAND LINE
+	STEP 1: Capture and convert all IR codes from TV remote and Apple TV remote using modified public domain code from IRReceiver.
+	STEP 2: Add these codes as functions in the TVControllerMain.ino file, and code each button to a different Serial port. (i.e. to turn on TV, use './arduino-serial -b 9600 -p /dev/tty.usbmodemFD121 -s 1' as a command-line prompt.
+	STEP 3: Make aliases in .bash_profile for each of these, (i.e. alias tv = "./arduino-serial -b 9600 -p /dev/tty.usbmodemFD121 -s a"), so that the commands are simplified and available from command line.
+
+PART 2: TRANSITION CODE TO RASPBERRY PI
+	TODO!!!
