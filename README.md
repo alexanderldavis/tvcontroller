@@ -100,7 +100,7 @@ Unzip the file in your desktop/documents directory. Go to your terminal, navigat
 
 Got back to terminal and type ```./arduino-serial -b 9600 -p /dev/tty.usbmodemFD121 -s 1```, replacing my ```/dev/tty.usbmodemFD121``` with your copied serial port. Press enter and voila! Barring any major issues your Arduino will transmit the 'on' code for your TV and you can watch some HBO! Change the number at the end of the terminal invocation to invoke different buttons. For example, if you 'Input' button is in your code in the second button function slot, you can change delete the 1 and insert a 2 to send the 'Input' code! You can create bash files/aliases in your .bash_profile to make shortcuts for this. For example, I can type 'tv' into my command line to toggle the tv, tv_up to change volume, etc..
 
-TODO[Wishlist]=Create shortcut in TVControllerMain code to increase volume in increments of 10, instead of individual units (takes too long!)
+TODO[Wishlist]=Create shortcut in TVControllerMain code to increase volume in increments of 10, instead of individual units (takes too long!) (Maybe see how a button long press is transmitted)
 
 I will add to these instructions as I continue to figure them out! I think the next steps will involve creating a personal Skill for the Alexa.
 
