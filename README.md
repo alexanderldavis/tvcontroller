@@ -85,7 +85,7 @@ Repeat these steps for each button you wish to code. Note: This worked for my TV
 
 Once the TVControllerMainBlank code is ready, it's time to start transmitting the code!
 
-### 4. Assembly (pt2)
+#### 4. Assembly (pt2)
 Assemble these pieces as shown in the diagram below (FIG2). Plug Arduino into your computer.
 
 (FIG2)
@@ -93,7 +93,7 @@ Assemble these pieces as shown in the diagram below (FIG2). Plug Arduino into yo
 
 Upload TVControllerMainBlank.ino to Arduino.
 
-### 5. Enable Arduino-Serial
+#### 5. Enable Arduino-Serial
 Download the Zip of [arduino-serial](https://github.com/todbot/arduino-serial) (https://github.com/todbot/arduino-serial).
 
 Unzip the file in your desktop/documents directory. Go to your terminal, navigate to the directory and use command ```make arduino-serial``` to compile the file, then use command ```ls /dev/tty.*``` to find all serial ports available. It should look like: ```/dev/tty.Bluetooth-Incoming-Port	/dev/tty.usbmodemFD121``` (with Arduino plugged in). Copy the second serial port (in this case ```/dev/tty.usbmodemFD121```) and put it aside for safekeeping.
@@ -102,5 +102,6 @@ Got back to terminal and type ```./arduino-serial -b 9600 -p /dev/tty.usbmodemFD
 
 TODO[Wishlist]=Create shortcut in TVControllerMain code to increase volume in increments of 10, instead of individual units (takes too long!) (Maybe see how a button long press is transmitted)
 
+### Connect Alexa to Raspberry Pi
 I will add to these instructions as I continue to figure them out! I think the next steps will involve creating a personal Skill for the Alexa.
 
