@@ -7,9 +7,12 @@ _Check out this [wiki](todo) if you are interested in this project and don't hav
 If anybody is interested in installing their own version of this little project, feel free to follow these instructions! I found most of this information online, so be sure to ask Gewgle for instructions if you question my methods! If you are new to Arduino, welcome! You may want to complete some (also fun) smaller projects. This one is not difficult by any means, but I may not be the most verbose teacher. There are other tutorials that will be easier to start with (and will explain basic commands more better).
 
 These instructions are composed of three parts:
-1. Control TV from Command Line on Raspberry Pi
-2. Control Raspberry Pi from Alexa (through homeassistant)
-3. Control TV from Alexa
+
+	* Control TV from Command Line on Raspberry Pi
+	  - Assemble and program remote buttons into IR reciever
+	  - Assemble and program IR transmitter
+	* Control Raspberry Pi from Alexa (through homeassistant)
+	* Control TV from Alexa
 
 Along the way, I will link to wikis that could help people troubleshoot their issues. My base computer is a MacBook Pro (named Roxana after the murderous wife of Alexander the Great), but all of the following instructions _should_ work on any OS and base hardware. Open an issue and report your software if you find this is not the case!
 
