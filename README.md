@@ -25,28 +25,30 @@ Along the way, I will link to wikis that could help people troubleshoot their is
 #### Required Software (Quick Note):
 * Raspberry Pi must have the [latest version of Raspbian Jessie](https://www.raspberrypi.org/downloads/raspbian/) (not Lite!) Find installation instructions on the Raspberry Pi website!
 
-## (1) Control TV from Command Line
+### (1) Control TV from Command Line
 
-### 1. Assembly of Arduino IR Reciever (Remote Control Coding)
+#### 1. Assembly of Arduino IR Reciever (Remote Control Coding)
 Assemble these pieces as shown in the diagram below (FIG1). Plug Arduino into your computer.
 
 (FIG1)
 ![Arduino Reciever](https://raw.githubusercontent.com/alexanderldavis/tvcontroller/master/Images/irreceiver_bb.png)
 (FIG1: Assembly of the Arduino IR receiver. This receiver will allow you to identify your remote's code and prep the raw data for your transmitter code.) 
 
-### 2. Download code
+#### 2. Download code
 Download the files [IRReceiver.ino](https://github.com/alexanderldavis/tvcontroller/blob/master/IRReceiver.ino) and [TVControllerMainBlank.ino](https://github.com/alexanderldavis/tvcontroller/blob/master/TVControllerMainBlank.ino) to your base computer (not the Raspberry Pi).
 
 Open IRReceiver.ino in the Arduino IDE, download to Arduino and run it. Open your Serial Monitor and press a button on your remote once. It will output the code in the right format.
 
 The format will be:
-``` void name() {
+```
+void name() {
 	delayMicroseconds(57964);
 	pulseIR(9280);
 	delayMicroseconds(4580);
 	pulseIR(600);
     ...
-}```
+}
+```
 
 Copy the code from the Serial Monitor and paste it into the TVControllerMainBlank.ino code at the bottom of the file. Then rename the function name "void [put new name here] ()" and take that name, scroll up the TVController MainBlank code, and paste it in the void loop().
 
