@@ -40,7 +40,7 @@ Download the files [IRReceiver.ino](https://github.com/alexanderldavis/tvcontrol
 Open IRReceiver.ino in the Arduino IDE, download to Arduino and run it. Open your Serial Monitor and press a button on your remote once. It will output the code in the right format.
 
 The format will be:
-```
+```arduino
 void name() {
 	delayMicroseconds(57964);
 	pulseIR(9280);
