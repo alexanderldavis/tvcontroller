@@ -1,54 +1,41 @@
 # The AMAZON ECHO (Alexa) TV Controller
+This is a simple homeassistant (HASS)-based, light-weight configuration for Raspberry Pi that allow custom-built Alexa commands to control a TV. The TV controller itself is run through an Arduino that is connected to an infared transmitter.
 
-## The Intro
-[This is an intro I wrote while procrastinating on a project, so feel free to skip it!]
-We humans (for we are humans--right?), are on the verge of a massive revolution. I'm sure I'm hardly the only one who was enchanted by the Orwellian prospect of a humanity entirely dependent on technology, and while some may cite Karel Čapek's R.U.R to suggest the deleterious impact of robots on humanity, I stubbornly submit the same text as evidence to suggest the benefits of a robot revolution. Humanity's definition of itself is far too narrow, and the declaration of sentiency for man-made items should not be restricted to offspring.
-While we are not quite at the point of Westworld-ian technology (I side with Ford's vision of humanity, BTW), I enjoy engaging in these debates!
+_Check out this [wiki](todo) if you are interested in this project and don't have a Raspberry Pi or you want to implement a similar setup on a "normal" machine. For convienence, this is not suggested, as then the commands will only work when the "normal" machine is online. This may limit functionality, as the HASS server may suffer from interruptions._
 
-Anyhoo, I am interested in participating in the eventual creation of this sentiency, and I believe it begins with having a robot turn on and off a TV!
+## Replication Instructions
+If anybody is interested in installing their own version of this little project, feel free to follow these instructions! I found most of this information online, so be sure to ask Gewgle for instructions if you question my methods! If you are new to Arduino, welcome! You may want to complete some (also fun) smaller projects. This one is not difficult by any means, but I may not be the most verbose teacher. There are other tutorials that will be easier to start with (and will explain basic commands more better).
 
-Ever since I purchased an Amazon Echo (www.amazon.com) for my dorm room (late 2015), I set out to find ways to grant her more control over aspects of life in the room. This ambitious goal began with simple lights operating on WeMo Switch (www.belkin.com) hardware, as well as hands-free control of basic functions of my Mac, including sleep and wake functions. 
+These instructions are composed of three parts:
+1. Control TV from Command Line on Raspberry Pi
+2. Control Raspberry Pi from Alexa (through homeassistant)
+3. Control TV from Alexa
 
-In my quest to make the Alexa an unrivaled master of a kingdom that sprawls 3 meters x 5 meters, I have come to the realization that limitations imposed by the archaic Internet security technicians at my school significantly impact my ability to connect devices to the Internet of Things. Registering the Alexa was difficult enough, I finally had to put her on the phone to explain what she was to the registration technician. I have therefore began to research ways to have her control other devices remotely (or at least without too much reliance on WiFi).
+Along the way, I will link to wikis that could help people troubleshoot their issues. My base computer is a MacBook Pro (named Roxana after the murderous wife of Alexander the Great), but all of the following instructions _should_ work on any OS and base hardware. Open an issue and report your software if you find this is not the case!
 
-So it begins....
+#### Required Components:
+* Amazon Echo/Amazon Echo Dot/[Amazon Echosim.io](https://echosim.io/) (More on the latter in the wiki (TODO))
+* Raspberry Pi 3 (I have not tested on the Raspberry Pi 2, 1 or zero, though with a litte research I'm sure it would work similarly)
+* Arduino Uno Rev 3 (Again, not tested on any other iteration of Arduino, yet!)
+* Arduino Breadboard (not entirely necessary, but it makes your life easier!)
+* Arduino Cables
+* Arduino [3-prong IR reciever and transmitter](https://www.amazon.com/AIRSUNNY-three-Infrared-Emission-Receiver/dp/B00EFOQEUM/ref=sr_1_1?ie=UTF8&qid=1487019069&sr=8-1&keywords=ir+receiver+arduino)
+*These are all available on Amazon, but are found cheaper on eBay. Proceed with caution on eBay, as lower-priced components are generally less reputable!
 
-## The Plan
-I write into this empty void to help me organize my thoughts. The first step of this project is to create a program for the Arduino to recieve and transmit code to the TV from the remote. Transmitter and reciever code is provided on the public domain by AdaFruit (www.adafruit.com) and (www.ladyada.net). To allow me to code the buttons quickly, I will write a small Python program to let me change the inputted Raw data from the receiver to match the format requirements for the transmitter .ino code.
-(i.e.:
-  from '57964 usec, 9280 usec'
-  to '	delayMicroseconds(57964);
-	      pulseIR(9280);
-     ')
-Update (later that day): I also edited the IRReciever.ino code so that it outputs the raw data in the format required by the Transmitter code.
+#### Required Software (Quick Note):
+* Raspberry Pi must have the [latest version of Raspbian Jessie](https://www.raspberrypi.org/downloads/raspbian/) (not Lite!) Find installation instructions on the Raspberry Pi website!
 
-## The Agenda
-PART 1: CONTROL TV FROM COMMAND LINE
-	STEP 1: Capture and convert all IR codes from TV remote and Apple TV remote using modified public domain code from IRReceiver.
-	STEP 2: Add these codes as functions in the TVControllerMain.ino file, and code each button to a different Serial port. (i.e. to turn on TV, use './arduino-serial -b 9600 -p /dev/tty.usbmodemFD121 -s 1' as a command-line prompt.
-	STEP 3: Make aliases in .bash_profile for each of these, (i.e. alias tv = "./arduino-serial -b 9600 -p /dev/tty.usbmodemFD121 -s a"), so that the commands are simplified and available from command line.
+## (1) Control TV from Command Line
 
-PART 2: TRANSITION CODE TO RASPBERRY PI
-	TODO!!!
-    
-## Replication instructions
-If anybody is interested in installing their own version of this little project, feel free to follow these instructions! I found most of this information online, so be sure to ask Gewgle for instructions if you question my methods! If you are new to Arduino, welcome! You may want to complete some (also fun) smaller projects. This one is not difficult by any means, but I may not be the most verbose teacher. There are other tutorials that will be easier to start with (and will explain basic better).
-
-### Control TV from Command Line
-
-#### 1. Find materials 
-Acquire monies to purchase an Arduino UNO Rev3, a breadboard, cables, a 3-prong IR reciever made for Arduino, and an IR transmitter made for Arduino. (All of these are found on Amazon, but found cheaper on eBay).
-
-#### 2. Assembly
+### 1. Assembly of Arduino IR Reciever (Remote Control Coding)
 Assemble these pieces as shown in the diagram below (FIG1). Plug Arduino into your computer.
 
 (FIG1)
 ![Arduino Reciever](https://raw.githubusercontent.com/alexanderldavis/tvcontroller/master/Images/irreceiver_bb.png)
-(Assembly of the Arduino IR receiver. This receiver will allow you to identify your remote's code and prep the raw data for your transmitter code.) 
+(FIG1: Assembly of the Arduino IR receiver. This receiver will allow you to identify your remote's code and prep the raw data for your transmitter code.) 
 
-### 3. Download code
-Scroll up on this page and download the files IRReceiver.ino and TVControllerMainBlank.ino.
-
+### 2. Download code
+Download the files [IRReceiver.ino](https://github.com/alexanderldavis/tvcontroller/blob/master/IRReceiver.ino) and [TVControllerMainBlank.ino](https://github.com/alexanderldavis/tvcontroller/blob/master/TVControllerMainBlank.ino) to your base computer (not the Raspberry Pi).
 
 Open IRReceiver.ino in the Arduino IDE, download to Arduino and run it. Open your Serial Monitor and press a button on your remote once. It will output the code in the right format.
 
@@ -105,3 +92,33 @@ TODO[Wishlist]=Create shortcut in TVControllerMain code to increase volume in in
 ### Connect Alexa to Raspberry Pi
 I will add to these instructions as I continue to figure them out! I think the next steps will involve creating a personal Skill for the Alexa.
 
+## About The Project
+[This is an intro I wrote while procrastinating on a project, so feel free to skip it!]
+We humans (for we are humans--right?), are on the verge of a massive revolution. I'm sure I'm hardly the only one who was enchanted by the Orwellian prospect of a humanity entirely dependent on technology, and while some may cite Karel Čapek's R.U.R to suggest the deleterious impact of robots on humanity, I stubbornly submit the same text as evidence to suggest the benefits of a robot revolution. Humanity's definition of itself is far too narrow, and the declaration of sentiency for man-made items should not be restricted to offspring.
+While we are not quite at the point of Westworld-ian technology (I side with Ford's vision of humanity, BTW), I enjoy engaging in these debates!
+
+Anyhoo, I am interested in participating in the eventual creation of this sentiency, and I believe it begins with having a robot turn on and off a TV!
+
+Ever since I purchased an Amazon Echo (www.amazon.com) for my dorm room (late 2015), I set out to find ways to grant her more control over aspects of life in the room. This ambitious goal began with simple lights operating on WeMo Switch (www.belkin.com) hardware, as well as hands-free control of basic functions of my Mac, including sleep and wake functions. 
+
+In my quest to make the Alexa an unrivaled master of a kingdom that sprawls 3 meters x 5 meters, I have come to the realization that limitations imposed by the archaic Internet security technicians at my school significantly impact my ability to connect devices to the Internet of Things. Registering the Alexa was difficult enough, I finally had to put her on the phone to explain what she was to the registration technician. I have therefore began to research ways to have her control other devices remotely (or at least without too much reliance on WiFi).
+
+So it begins....
+
+## The Plan
+I write into this empty void to help me organize my thoughts. The first step of this project is to create a program for the Arduino to recieve and transmit code to the TV from the remote. Transmitter and reciever code is provided on the public domain by AdaFruit (www.adafruit.com) and (www.ladyada.net). To allow me to code the buttons quickly, I will write a small Python program to let me change the inputted Raw data from the receiver to match the format requirements for the transmitter .ino code.
+(i.e.:
+  from '57964 usec, 9280 usec'
+  to '	delayMicroseconds(57964);
+	      pulseIR(9280);
+     ')
+Update (later that day): I also edited the IRReciever.ino code so that it outputs the raw data in the format required by the Transmitter code.
+
+## The Agenda
+PART 1: CONTROL TV FROM COMMAND LINE
+	STEP 1: Capture and convert all IR codes from TV remote and Apple TV remote using modified public domain code from IRReceiver.
+	STEP 2: Add these codes as functions in the TVControllerMain.ino file, and code each button to a different Serial port. (i.e. to turn on TV, use './arduino-serial -b 9600 -p /dev/tty.usbmodemFD121 -s 1' as a command-line prompt.
+	STEP 3: Make aliases in .bash_profile for each of these, (i.e. alias tv = "./arduino-serial -b 9600 -p /dev/tty.usbmodemFD121 -s a"), so that the commands are simplified and available from command line.
+
+PART 2: TRANSITION CODE TO RASPBERRY PI
+	TODO!!!
