@@ -133,7 +133,7 @@ if (val == 1) {
 to
 ```
 if (val == 1) {powerButton();}
-```.
+```
 
 Repeat these steps for each button you wish to code. Note: This worked for my TV and my Apple TV. It did not work with my Alexa remote, other remotes because they are not IR. Ensure your remote is an IR remote before trying this code! (It seems obvious, but I got caught up in my initial tests!)
 
