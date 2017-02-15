@@ -1,4 +1,5 @@
 # The AMAZON ECHO (Alexa) TV Controller
+
 This is a simple homeassistant (HASS)-based, light-weight configuration for Raspberry Pi that allow custom-built Alexa commands to control a TV. The TV controller itself is run through an Arduino that is connected to an infared transmitter.
 
 _Check out this [wiki](todo) if you are interested in this project and don't have a Raspberry Pi or you want to implement a similar setup on a "normal" machine. For convienence, this is not suggested, as then the commands will only work when the "normal" machine is online. This may limit functionality, as the HASS server may suffer from interruptions._
