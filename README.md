@@ -75,10 +75,12 @@ $ curl -O https://raw.githubusercontent.com/home-assistant/fabric-home-assistant
 You may proceed with the Arduino instructions below while you wait. You will be prompted for a password near the end of the installation, so be sure to check the terminal window regularly. It should be going through installation scripts.
 
 Skip ahead while you wait, and come back here once the setup is done.
+
 ---------------------------------------------------------------------
 Once the installation is complete, type ```sudo shutdown -h now``` into your ssh connection. This will terminate the Raspberry Pi. Unplug it and plug it back in and allow it to fully reboot. Return to your base computer terminal, and ssh into it with the same command as above. Then, go to any browser on your base machine and type ```http://[your_raspberry_pi_ip]:8123```. Again, for mine this would be ```http://172.27.45.145:8123```. You should see the HomeAssistant frontend UI appear. If you do not see it, wait 20 seconds and try again. The first time it loads, the Rasberry Pi may take more time to fully boot the UI.
 
 Once you see it, congrats! You are ready for step 4! If you have any smart home devices (WeMo, Nest, Apple TVs, etc...) they may be showing up on the UI! If you don't see anything except the blue bar at the top, don't fret! You will soon!
+
 ---------------------------------------------------------------------
 
 ### (3) Setup Arduino
