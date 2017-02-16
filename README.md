@@ -2,7 +2,7 @@
 
 This is a simple homeassistant (HASS)-based, light-weight configuration for Raspberry Pi that allow custom-built Alexa commands to control a TV. The TV controller itself is run through an Arduino that is connected to an infared transmitter.
 
-_Check out this [wiki](todo) if you are interested in this project and don't have a Raspberry Pi or you want to implement a similar setup on a "normal" machine. For convienence, this is not suggested, as then the commands will only work when the "normal" machine is online. This may limit functionality, as the HASS server may suffer from interruptions._
+_Check out this [wiki](https://github.com/alexanderldavis/tvcontroller/wiki/Installing-HASS-on-Base-Computer-(Instead-of-Raspberry-Pi) if you are interested in this project and don't have a Raspberry Pi or you want to implement a similar setup on a "normal" machine. For convienence, this is not suggested, as then the commands will only work when the "normal" machine is online. This may limit functionality, as the HASS server may suffer from interruptions._
 
 ## Replication Instructions
 If anybody is interested in installing their own version of this little project, feel free to follow these instructions! I found most of this information online, so be sure to ask Gewgle for instructions if you question my methods! If you are new to Arduino and Rasberry Pi, welcome! (so am I!) You may want to complete some (also fun) smaller projects. This one is not difficult by any means, but I may not be the most verbose teacher. There are other tutorials that will be easier to start with (and will explain basic commands more better).
