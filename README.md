@@ -160,7 +160,7 @@ To control the arduino from the command line, we use a tool called [arduino-seri
 
 Return to the SSH connection in your base computer's terminal. Now, type ```sudo su -s /bin/bash homeassistant``` to change to the homeassistant user. Next, type ```cd``` to get you to the home directory of the homeassistant user. Clone arduino-serial to your directory by typing ```git clone https://github.com/todbot/arduino-serial.git```. Then cd into the created folder by typing ```cd arduino-serial```. Type ```make``` to make the C++, and then type ```./arduino-serial``` to return to the directory.
 
-You can now type ```exit``` to return to your pi user. Next, plug your arduino into your raspberry pi and type ```ls /dev/ttyACM*``` to see all connections. (On mac or windows, this command is ```ls /dev/tty.*``` You should see a connection name like ```/dev/ttyACM0```returned to the screen. Keep this connection name for safe keeping.
+You can now type ```exit``` to return to your pi user. Next, plug your arduino into your raspberry pi and type ```ls /dev/ttyACM*``` to see all connections. (On mac or windows, this command is ```ls /dev/tty.*```) You should see a connection name like ```/dev/ttyACM0```returned to the screen. Keep this connection name for safe keeping.
 
 ### (4) Connect Arduino-Serial to HASS
 Next, you will want to download the configuration.yaml file I provide above. You should then fill in all of the [REDACTED] fields with your information. This includes latitude, longitude, elevation, and an api_password of your choice.
